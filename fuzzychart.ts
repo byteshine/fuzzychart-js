@@ -1,14 +1,15 @@
 // display probability density of normally distributed fuzzy points in
 // an x-y plot
+
 /// <reference lib="dom" />
 /// <reference lib="es5" />
 
 // without about_config privacy.file_unique_origin=false ffox refuses import
-// but its broken refuses even if false so must cmpile to 1 src fuzcc.bat
+// but its broken refuses even if false so must compile to 1 js source fuzcc.bat
 //import * from './lib/libnum';
 //import {random_normal} from './lib/libnum';
 
-// why ts complains Uint8ClampedArray not generic its in es5
+// ts complains Uint8ClampedArray not generic even though its in es5
 // but dont want anywy, needs to be ImageData
 // type ImageData_pixel = Uint8ClampedArray<4>; // = rgba_pixel
 type ImageData_pixel = ImageData; // = rgba_pixel
@@ -16,7 +17,7 @@ type ImageData_pixel = ImageData; // = rgba_pixel
 // stackoverflow.com/questions/1573053/javascript-function-to-convert-color-names-to-hex-codes/24390910
 function color_to_rgba( color: string ): ImageData_pixel
 {
-  // Returns the color as an array of [r, g, b, a] -- all range from 0 - 255
+  // Returns the color as an array of [r, g, b, a] -- all range from 0..255
   // color must be a valid canvas fillStyle. This will cover most anything
   // you'd want to use.
   // Examples:
@@ -65,6 +66,7 @@ function number_to_label_string( xx: number ): string
   label = label.replace( /\.$/, '' );
   return label;
 }
+
 /****
 // test:
 function test_label( xx: number ): void
@@ -126,7 +128,7 @@ result:
 
 // imageData does not know its context, caller must pass
 // imageData returned by context.createImageData
-// later stdev_x, stdev_y can be arrays
+// later if needed stdev_x, stdev_y can be arrays
 function fuzzy_chart( context: CanvasRenderingContext2D, imageData: ImageData,
                       x_values: number[], y_values: number[],
                       stdev_x: number, stdev_y: number )

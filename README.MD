@@ -1,1 +1,1 @@
-"fuzzychart-js under construction"
+fuzzychart-js under construction
